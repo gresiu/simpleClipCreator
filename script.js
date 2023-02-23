@@ -1,9 +1,13 @@
 const clientId = 'zhbln8a0mbplx6uf5cvrrqxa5jfaan';
 
 const getOAuthToken = async () => {
+  if (localStorage.getItem("oauth")) {
+    return localStorage.getItem("oauth");
+  }
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   const accessToken = parsedHash.get('access_token');
-  console.log(accessToken);
+  localStorage.setItem("oauth", accessToken);
+  console.log(localStorage.getItem("oauth"));
   return accessToken;
 };
 
