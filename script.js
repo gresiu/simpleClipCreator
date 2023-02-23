@@ -8,6 +8,7 @@ const getOAuthToken = async () => {
   const accessToken = parsedHash.get('access_token');
   localStorage.setItem("oauth", accessToken);
   console.log(localStorage.getItem("oauth"));
+  
   return accessToken;
 };
 
