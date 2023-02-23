@@ -66,7 +66,7 @@ const editClip = async (oauthToken, clipId) => {
 const main = async () => {
   const oauthToken = await getOAuthToken();
   const broadcasterId = await getUserId(oauthToken, document.getElementById("nick").value);
-  console.log(broadcasterId);
+  console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
   const clipId = await createClip(oauthToken, broadcasterId);
   console.log(clipId);
   await editClip(oauthToken, clipId);
