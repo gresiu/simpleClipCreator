@@ -8,7 +8,7 @@ const getOAuthToken = async () => {
   const accessToken = parsedHash.get('access_token');
   localStorage.setItem("oauth", accessToken);
   console.log(localStorage.getItem("oauth"));
-  
+
   return accessToken;
 };
 
@@ -65,7 +65,7 @@ const editClip = async (oauthToken, clipId) => {
 
 const main = async () => {
   const oauthToken = await getOAuthToken();
-  const broadcasterId = await getUserId(oauthToken, 'Izabelia');
+  const broadcasterId = await getUserId(oauthToken, document.getElementById("nick").value);
   console.log(broadcasterId);
   const clipId = await createClip(oauthToken, broadcasterId);
   console.log(clipId);
