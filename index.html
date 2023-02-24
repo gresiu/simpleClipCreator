@@ -2,17 +2,24 @@
 <html>
 <head>
 <title>SimpleClipCreator</title>
-<script src="script.js"></script>
-<link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
 
-<h1>SimpleClipCreator</h1>
-<label for="nick">Streamer nickname:</label>
-<input type="text" id="nick" name="nick"> <br/>
-<a href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=zhbln8a0mbplx6uf5cvrrqxa5jfaan&redirect_uri=https://gresiu.github.io/simpleClipCreator&scope=clips%3Aedit">Connect to Twitch</a>
-<button type="button" onclick="main()">Clip</button>
-<p id="status">Status: Waiting</p>
-<p>by @greslaff</p>
+<div class="container">
+    <h1 class="mt-5">SimpleClipCreator</h1>
+    <label for="nick">Streamer nickname:</label>
+    <input type="text" id="nick" name="nick"> 
+    <div>
+    <a role="button" class="btn btn-primary purple" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=zhbln8a0mbplx6uf5cvrrqxa5jfaan&redirect_uri=https://gresiu.github.io/simpleClipCreator&scope=clips%3Aedit">Connect to Twitch</a>
+    <button class="btn btn-primary" type="button" onclick="main()">Clip</button>
+    </div>
+    <p id="status">Status: Waiting</p>
+    <p>by @greslaff</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="script.js"></script>
 </body>
 </html>
