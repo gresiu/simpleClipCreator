@@ -1,12 +1,23 @@
 const clientId = 'zhbln8a0mbplx6uf5cvrrqxa5jfaan';
 
+window.onload = function WindowLoad(event) {
+  if (sessionStorage.getItem("oauth")) {
+    console.log(localStorage.getItem("oauth"));
+    document.getElementById("clipBody").style.visibility=true;
+    document.getElementById("loginButton").style.visibility=false;
+    return;
+  } 
+
+
+}
+
 const getOAuthToken = async () => {
-  if (localStorage.getItem("oauth")) {
-    return localStorage.getItem("oauth");
+  if (sessionStorage.getItem("oauth")) {
+    return sessionStorage.getItem("oauth");
   }
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   const accessToken = parsedHash.get('access_token');
-  localStorage.setItem("oauth", accessToken);
+  sessionStorage.setItem("oauth", accessToken);
   console.log(localStorage.getItem("oauth"));
 
   return accessToken;
