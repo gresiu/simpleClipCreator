@@ -1,7 +1,7 @@
 const clientId = 'zhbln8a0mbplx6uf5cvrrqxa5jfaan';
 
 window.onload = async () =>{
-  document.getElementById("clipBody").style.visibility='hidden';
+  document.getElementById("clipBody").style.display='none';
   console.log("hello");
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   if(parsedHash.get('access_token')){
@@ -23,8 +23,8 @@ window.onload = async () =>{
     return;
   }
 
-  document.getElementById("clipBody").style.visibility='visible';
-  document.getElementById("loginButton").style.visibility='hidden';
+  document.getElementById("clipBody").style.display='block';
+  document.getElementById("loginButton").style.display='none';
   console.log("logged in");
 }
 
