@@ -17,29 +17,15 @@ window.onload = async (event) =>{
     }
   });
   console.log(response);
-  if(response["status"] == 401) {
-    console.log("outh token is expired");
+  if(response["status"] != 200) {
     sessionStorage.removeItem("oauth");
     return;
   }
 
-  document.getElementById("clipBody").style.visibility='';
-  document.getElementById("loginButton").style.visibility='';
+  document.getElementById("clipBody").style.visibility='visible';
+  document.getElementById("loginButton").style.visibility='hidden';
   console.log("logged in");
 }
-
-const getOAuthToken = async () => {
-  
-  if (sessionStorage.getItem("oauth")) {
-    return sessionStorage.getItem("oauth");
-  }
-  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
-  const accessToken = parsedHash.get('access_token');
-  sessionStorage.setItem("oauth", accessToken);
-  console.log(localStorage.getItem("oauth"));
-
-  return accessToken;
-};
 
 const getUserId = async (oauthToken, loginName) => {
     const response = await fetch(`https://api.twitch.tv/helix/users?login=${loginName}`, {
@@ -75,7 +61,7 @@ const createClip = async (oauthToken, broadcasterId) => {
   return json['data'][0]['id'];
 };
 
-const editClip = async (oauthToken, clipId) => {
+/*const editClip = async (oauthToken, clipId) => {
   const headers = {
     'Authorization': `Bearer ${oauthToken}`,
     'Client-ID': clientId
@@ -85,21 +71,20 @@ const editClip = async (oauthToken, clipId) => {
     method: 'PATCH',
     headers: headers,
     body: JSON.stringify({
-      title: 'My Cool Clip',
-      description: 'Check out this awesome clip I made!'
+      title: 'x',
+      description: 'y'
     }),
   });
   const json = await response.json();
   console.log(json);
-};
+};*/
 
 const main = async () => {
-  //const oauthToken = await getOAuthToken();
   const broadcasterId = await getUserId(sessionStorage.getItem("oauth"), document.getElementById("nick").value);
   console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
   const clipId = await createClip(sessionStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
-  await editClip(oauthToken, clipId);
+  //await editClip(oauthToken, clipId);
   
   
 
