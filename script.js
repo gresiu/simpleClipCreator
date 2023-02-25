@@ -4,9 +4,7 @@ window.onload = async () => {
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   if(parsedHash.get('access_token')){
     sessionStorage.setItem("oauth", parsedHash.get('access_token'));
-    document.getElementById("clipBody").style.visibility='';
-    document.getElementById("loginButton").style.visibility=''""'';
-    return;
+    console.log("outh token found in url");
   }
 
   if (!sessionStorage.getItem("oauth")) return;
@@ -17,14 +15,16 @@ window.onload = async () => {
       'Client-ID': clientId
     }
   });
-
+  console.log(response);
   if(response["status"] == 401) {
+    console.log("outh token is expired");
     sessionStorage.removeItem("oauth");
     return;
   }
 
   document.getElementById("clipBody").style.visibility='';
   document.getElementById("loginButton").style.visibility='';
+  console.log("logged in");
 }
 
 const getOAuthToken = async () => {
