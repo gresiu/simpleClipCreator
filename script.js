@@ -1,6 +1,7 @@
 const clientId = 'zhbln8a0mbplx6uf5cvrrqxa5jfaan';
 
-window.onload = async (event) =>{
+window.onload = async () =>{
+  document.getElementById("clipBody").style.visibility='hidden';
   console.log("hello");
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   if(parsedHash.get('access_token')){
