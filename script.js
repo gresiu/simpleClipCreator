@@ -4,8 +4,8 @@ window.onload = async () => {
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   if(parsedHash.get('access_token')){
     sessionStorage.setItem("oauth", parsedHash.get('access_token'));
-    document.getElementById("clipBody").style.visibility="block";
-    document.getElementById("loginButton").style.visibility="hidden";
+    document.getElementById("clipBody").style.visibility='';
+    document.getElementById("loginButton").style.visibility=''""'';
     return;
   }
 
@@ -23,8 +23,8 @@ window.onload = async () => {
     return;
   }
 
-  document.getElementById("clipBody").style.visibility="block";
-  document.getElementById("loginButton").style.visibility="hidden";
+  document.getElementById("clipBody").style.visibility='';
+  document.getElementById("loginButton").style.visibility='';
 }
 
 const getOAuthToken = async () => {
@@ -48,6 +48,7 @@ const getUserId = async (oauthToken, loginName) => {
       }
     });
     const json = await response.json();
+    console.log(response);
     return json['data'][0]['id'];
   };
 
