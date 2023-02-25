@@ -4,8 +4,8 @@ window.onload = async () => {
   const parsedHash = new URLSearchParams(window.location.hash.substr(1));
   if(parsedHash.get('access_token')){
     sessionStorage.setItem("oauth", parsedHash.get('access_token'));
-    document.getElementById("clipBody").style.visibility=true;
-    document.getElementById("loginButton").style.visibility=false;
+    document.getElementById("clipBody").style.visibility="block";
+    document.getElementById("loginButton").style.visibility="hidden";
     return;
   }
 
@@ -23,8 +23,8 @@ window.onload = async () => {
     return;
   }
 
-  document.getElementById("clipBody").style.visibility=true;
-  document.getElementById("loginButton").style.visibility=false;
+  document.getElementById("clipBody").style.visibility="block";
+  document.getElementById("loginButton").style.visibility="hidden";
 }
 
 const getOAuthToken = async () => {
@@ -93,9 +93,9 @@ const editClip = async (oauthToken, clipId) => {
 
 const main = async () => {
   //const oauthToken = await getOAuthToken();
-  const broadcasterId = await getUserId(localStorage.getItem("oauth"), document.getElementById("nick").value);
+  const broadcasterId = await getUserId(sessionStorage.getItem("oauth"), document.getElementById("nick").value);
   console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
-  const clipId = await createClip(localStorage.getItem("oauth"), broadcasterId);
+  const clipId = await createClip(sessionStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
   await editClip(oauthToken, clipId);
   
