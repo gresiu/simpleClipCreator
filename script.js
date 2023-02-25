@@ -1,17 +1,34 @@
 const clientId = 'zhbln8a0mbplx6uf5cvrrqxa5jfaan';
 
-window.onload = function WindowLoad(event) {
-  if (sessionStorage.getItem("oauth")) {
-    console.log(localStorage.getItem("oauth"));
+window.onload = async () => {
+  const parsedHash = new URLSearchParams(window.location.hash.substr(1));
+  if(parsedHash.get('access_token')){
+    sessionStorage.setItem("oauth", parsedHash.get('access_token'));
     document.getElementById("clipBody").style.visibility=true;
     document.getElementById("loginButton").style.visibility=false;
     return;
-  } 
+  }
 
+  if (!sessionStorage.getItem("oauth")) return;
 
+  const response = await fetch(`https://api.twitch.tv/helix/users?login=gresiu`, {
+    headers: {
+      'Authorization': `Bearer ${sessionStorage.getItem("oauth")}`,
+      'Client-ID': clientId
+    }
+  });
+
+  if(response["status"] == 401) {
+    sessionStorage.removeItem("oauth");
+    return;
+  }
+
+  document.getElementById("clipBody").style.visibility=true;
+  document.getElementById("loginButton").style.visibility=false;
 }
 
 const getOAuthToken = async () => {
+  
   if (sessionStorage.getItem("oauth")) {
     return sessionStorage.getItem("oauth");
   }
@@ -75,10 +92,10 @@ const editClip = async (oauthToken, clipId) => {
 };
 
 const main = async () => {
-  const oauthToken = await getOAuthToken();
-  const broadcasterId = await getUserId(oauthToken, document.getElementById("nick").value);
+  //const oauthToken = await getOAuthToken();
+  const broadcasterId = await getUserId(localStorage.getItem("oauth"), document.getElementById("nick").value);
   console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
-  const clipId = await createClip(oauthToken, broadcasterId);
+  const clipId = await createClip(localStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
   await editClip(oauthToken, clipId);
   
