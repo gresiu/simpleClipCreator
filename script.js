@@ -26,6 +26,8 @@ window.onload = async () =>{
   document.getElementById("clipBody").style.display='block';
   document.getElementById("loginButton").style.display='none';
   console.log("logged in");
+
+  document.getElementById("nick").value=localStorage.getItem("nick");
 }
 
 const getUserId = async (oauthToken, loginName) => {
@@ -86,7 +88,7 @@ const main = async () => {
   const clipId = await createClip(sessionStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
   //await editClip(oauthToken, clipId);
-  
+  localStorage.setItem("nick", document.getElementById("nick").value);
   
 
 };
