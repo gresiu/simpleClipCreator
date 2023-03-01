@@ -88,7 +88,7 @@ const main = async () => {
   console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
   const clipId = await createClip(sessionStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
-  await editClip(oauthToken, clipId);
+  await editClip(sessionStorage.getItem("oauth"), clipId);
   localStorage.setItem(sessionStorage.getItem("oauth"), document.getElementById("nick").value);
   
 
