@@ -64,8 +64,9 @@ const createClip = async (oauthToken, broadcasterId) => {
   return json['data'][0]['id'];
 };
 
-/*const editClip = async (oauthToken, clipId) => {
+const editClip = async (oauthToken, clipId) => {
   const headers = {
+    'Content-Type': 'application/json',
     'Authorization': `Bearer ${oauthToken}`,
     'Client-ID': clientId
   };
@@ -80,15 +81,15 @@ const createClip = async (oauthToken, broadcasterId) => {
   });
   const json = await response.json();
   console.log(json);
-};*/
+};
 
 const main = async () => {
   const broadcasterId = await getUserId(sessionStorage.getItem("oauth"), document.getElementById("nick").value);
   console.log(document.getElementById("nick").value + "'s id is " + broadcasterId);
   const clipId = await createClip(sessionStorage.getItem("oauth"), broadcasterId);
   console.log(clipId);
-  //await editClip(oauthToken, clipId);
-  localStorage.setItem("nick", document.getElementById("nick").value);
+  await editClip(oauthToken, clipId);
+  localStorage.setItem(sessionStorage.getItem("oauth"), document.getElementById("nick").value);
   
 
 };
